@@ -1,5 +1,5 @@
 <?php
-
+ 
 ini_set("soap.wsdl_cache_enabled", 0); 
 define("MAGE_BASE_DIR", "..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR);
 define("BASE_STORE", 1);
@@ -15,8 +15,8 @@ $_myrequest = file_get_contents('php://input');
 if ($_myrequest."" != "") {
 	//myLog($_myrequest, Zend_Log::DEBUG, "AzzurraWS.log", true);
 	//myLog($_SESSION, Zend_Log::DEBUG, "AzzurraWS.log", true);
-	myLog(getallheaders(), Zend_Log::DEBUG, "AzzurraWS.log", true);
-	myLog($_SERVER, Zend_Log::DEBUG, "AzzurraWS.log", true);
+	//myLog(getallheaders(), Zend_Log::DEBUG, "AzzurraWS.log", true);
+	//myLog($_SERVER, Zend_Log::DEBUG, "AzzurraWS.log", true);
 }
 
 require_once("Zend/Soap/Server.php");

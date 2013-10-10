@@ -3,6 +3,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+  
 define("MAGE_BASE_DIR", "..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR);
 
 define("BASE_STORE", 1);

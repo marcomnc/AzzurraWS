@@ -5,17 +5,39 @@ class WSDL {
     private $_wsdl = '';
     private $_filename = '';
     
-    public function __construct() {
-        $this->_filename = 'http://' . $_SERVER['HTTP_HOST'] . '/externalWs/azzurra/Data/azzurra.wsdl';
+    public function __construct() {    	
+        $this->_filename = __DIR__ . '/../Data/azzurra.wsdl';
     }
     
     public function getWSDL() {
         if ($this->_wsdl == "") {
-            $this->_setWSDL();
+            $this->_setWSDLfromFile();
         }
         return $this->_wsdl;
     }
 
+		private function _setWSDLfromFile() {
+			$wsdl = file_get_contents($this->_filename);
+
+			$protocols = preg_split("/\//", $_SERVER['SERVER_PROTOCOL']);
+
+			$protocol = "http";
+			if (isset($protocols[0])) {
+				$protocol = strtolower($protocols[0]);	
+			}
+			
+			$scripts = preg_split("/\//", $_SERVER['REQUEST_URI']);
+
+			for ($i = 0; $i < sizeof($scripts)-1; $i++) {
+				if ($scripts[$i] != "")
+					$baseUri .= "/" . $scripts[$i];
+			}
+			
+			$baseUri = "$protocol://". $_SERVER['HTTP_HOST'] . $baseUri;
+
+			$this->_wsdl = str_replace("#base_uri#", $baseUri, $wsdl);
+			
+		}
     
     private function _setWSDL () {
         $this->_wsdl = '<?xml version="1.0" encoding="utf-8"?>

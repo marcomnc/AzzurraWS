@@ -26,9 +26,9 @@ class XmlOutPut {
     }
         
     public function setResponse($response) {
-        $this->_response['open'] = "<$response xmlns=\"http://keypass.it/azzurra/\">";
+        $this->_response['open'] = "<$response xmlns=\"" . WSDL::getBaseUri() ."\">";
         $this->_response['close'] = "</$response>";
-        $this->_response['4null'] = "<$response xmlns=\"http://keypass.it/azzurra/\" />";
+        $this->_response['4null'] = "<$response xmlns=\"" . WSDL::getBaseUri() . "\" />";
     }
     
     public function setResult($result) {
@@ -44,6 +44,11 @@ class XmlOutPut {
     public function ArrayOfString ($arrString) {
         return $this->_ArrayOf($arrString, "string");
         
+    }
+    
+    public function SimpleType($value, $name) {
+    	$_body .= "<$name>$value</$name>";
+    	return $this->_setOutPut(($_body));
     }
     
     /**

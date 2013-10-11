@@ -16,9 +16,8 @@ class WSDL {
         return $this->_wsdl;
     }
 
-		private function _setWSDLfromFile() {
-			$wsdl = file_get_contents($this->_filename);
-
+		public static function getBaseUri() {
+			
 			$protocols = preg_split("/\//", $_SERVER['SERVER_PROTOCOL']);
 
 			$protocol = "http";
@@ -27,15 +26,24 @@ class WSDL {
 			}
 			
 			$scripts = preg_split("/\//", $_SERVER['REQUEST_URI']);
-
+      $baseUri = "";
 			for ($i = 0; $i < sizeof($scripts)-1; $i++) {
 				if ($scripts[$i] != "")
 					$baseUri .= "/" . $scripts[$i];
 			}
 			
 			$baseUri = "$protocol://". $_SERVER['HTTP_HOST'] . $baseUri;
+			
+			return $baseUri;
+		}
 
-			$this->_wsdl = str_replace("#base_uri#", $baseUri, $wsdl);
+		private function _setWSDLfromFile() {
+
+			$wsdl = file_get_contents($this->_filename);
+			
+			$baseUri = self::getBaseUri();
+
+			$this->_wsdl = '<?xml version="1.0" encoding="utf-8"?>' . "\n" . str_replace("#base_uri#", $baseUri, $wsdl);
 			
 		}
     

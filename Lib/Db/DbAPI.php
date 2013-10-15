@@ -40,7 +40,7 @@ class DbAPI
 		return $mysqltime;
 	}
 	
-	public static function GetTable($tName, $params = array(), $fields = array(), $order = array()) {
+	public static function GetTable($tName, $params = array(), $fields = array(), $order = array(), $bind = null) {
 	
 		$columns = "";
 		
@@ -55,20 +55,24 @@ class DbAPI
 		}
 		
 		$where = "";
-		$bind = array();
-		if (sizeof($params) > 0) {			
-			foreach ($params as $field  => $comparision) {
-				$where .= $comparision['operator'] . " $field " . $comparision["comp"];
-				if (isset($comparision["value"])) {
-				  $where .= " ? ";
-				  $bind[] = $comparision["value"];
-				}
-			}
-			
-		}
+                if (is_array($params)) {
+                    $bind = array();
+                    if (sizeof($params) > 0) {			
+                            foreach ($params as $field  => $comparision) {
+                                    $where .= $comparision['operator'] . " $field " . $comparision["comp"];
+                                    if (isset($comparision["value"])) {
+                                      $where .= " ? ";
+                                      $bind[] = $comparision["value"];
+                                    }
+                            }
+
+                    }
+                } else {
+                    $where = $params;
+                }
 		
 		$orderBy = "";
-		if (sizeof($order) > 0) {			
+		if (!is_null($order) && is_array($order) && sizeof($order) > 0) {			
 		  foreach ($order as $field => $ord) {
 		    $orderBy .= ($orderBy == "") ? ", ": "";
 		    $orderBy .= "$field $ord";
@@ -87,22 +91,27 @@ class DbAPI
 		return $records;
 	}
 	
-	public static function SaveTable($tName, $fields, $keyFields) {
+	public static function SaveTable($tName, $fields, $keyFields = null) {
 	  
 	  $set = "";
 	  $where = "";
 	  $bindSet = array();
 	  $bindWhere = array();
+          $insertField = "";
+          $insert = "";
+          $bindInsert = array();
 	  
 	  foreach ($fields as $key => $value) {
 	    
 	    $isKey = false;
-	    foreach ($keyFields as $keyId) {
-	      if (strtolower($key) == strtolower($keyId)) {
-	        $isKey = true;
-	        break;
-	      }
-	    }
+            if (!is_null($keyFields) && is_array($keyFields)) {
+                foreach ($keyFields as $keyId) {
+                    if (strtolower($key) == strtolower($keyId)) {
+                        $isKey = true;
+                        break;
+                    }
+                }
+            }
 	    	    
 	    if (!$isKey) {
 	      $set .= ($set != "") ? ",\n" : "";
@@ -110,25 +119,40 @@ class DbAPI
 	      $bindSet[] = $value;
 	    } else {
 	      $where .= "\n\tAND $key = ?";
-	      $bindWhere[] = $value;
+	      $bindWhere[] = $value;              
 	    }
-	    
+            
+            $insertField .= ($insertField != "") ? ", $key" : $key;
+            $insert .= ($insert != "") ? ", ?" : "?";
+	    $bindInsert[] = $value;
 	  }
-	  
-	  $update = "UPDATE $tName SET $set WHERE 1 = 1 $where";
-	  
-	  $bind = $bindSet;
-	  foreach ($bindWhere as $bw) {
-	    $bind[] = $bw;
-	  }
-	  
-	  try {
-			self::$_writer->query($update, $bind);
-		} catch (Exception $ex) {
-			print_r($ex);
-      return false;
-		}  
-	  return true;
-	}
+          
+	  $curRec = array();
+          if (sizeof($bindWhere) > 0) {
+              $curRec = self::GetTable($tName, $where, null, null, $bindWhere );
+          }
+          
+          if (sizeof($bindWhere) > 0 && sizeof($curRec) > 0) {
+
+                $update = "UPDATE $tName SET $set WHERE 1 = 1 $where";
+
+                $bind = $bindSet;
+                foreach ($bindWhere as $bw) {
+                  $bind[] = $bw;
+                }
+                
+            } else {
+                $update = "INSERT INTO $tName ($insertField) VALUES ($insert)";
+                $bind = $bindInsert;
+            }
+            
+            try {
+                self::$_writer->query($update, $bind);
+            } catch (Exception $ex) {
+                print_r($ex);
+                return false;
+            }  
+            return true;
+        }
 }
 ?>

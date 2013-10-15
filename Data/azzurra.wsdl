@@ -1,6 +1,6 @@
-<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="#base_uri#/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="#base_uri#/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="#base_ns#/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="#base_ns#/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <s:schema elementFormDefault="qualified" targetNamespace="#base_uri#/">
+    <s:schema elementFormDefault="qualified" targetNamespace="#base_ns#/">
       <s:element name="SelezionaArticolo">
         <s:complexType>
           <s:sequence>
@@ -506,7 +506,7 @@
       <s:element name="StartImportResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="ImportId" type="s:string" />            
+            <s:element minOccurs="0" name="StartImportResult" type="s:string" />            
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -519,7 +519,7 @@
       </s:element>
       <s:element name="StopImportResponse">
         <s:complexType />
-      </s:element>      
+      </s:element>     
     </s:schema>
   </wsdl:types>
   <wsdl:message name="SelezionaArticoloSoapIn">
@@ -847,7 +847,7 @@
   <wsdl:binding name="AzzurraWebServiceSoap" type="tns:AzzurraWebServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="SelezionaArticolo">
-      <soap:operation soapAction="#base_uri#/SelezionaArticolo" style="document" />
+      <soap:operation soapAction="#base_ns#/SelezionaArticolo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -856,7 +856,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EliminaArticolo">
-      <soap:operation soapAction="#base_uri#/EliminaArticolo" style="document" />
+      <soap:operation soapAction="#base_ns#/EliminaArticolo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -865,7 +865,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="InserisciArticolo">
-      <soap:operation soapAction="#base_uri#/InserisciArticolo" style="document" />
+      <soap:operation soapAction="#base_ns#/InserisciArticolo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -874,7 +874,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AggiornaArticolo">
-      <soap:operation soapAction="#base_uri#/AggiornaArticolo" style="document" />
+      <soap:operation soapAction="#base_ns#/AggiornaArticolo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -883,7 +883,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCodiciArticolo">
-      <soap:operation soapAction="#base_uri#/SelezionaCodiciArticolo" style="document" />
+      <soap:operation soapAction="#base_ns#/SelezionaCodiciArticolo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -892,7 +892,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AggiornaQtaDisponibileArticolo">
-      <soap:operation soapAction="#base_uri#/AggiornaQtaDisponibileArticolo" style="document" />
+      <soap:operation soapAction="#base_ns#/AggiornaQtaDisponibileArticolo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -901,7 +901,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCliente">
-      <soap:operation soapAction="#base_uri#/SelezionaCliente" style="document" />
+      <soap:operation soapAction="#base_ns#/SelezionaCliente" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -910,7 +910,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EliminaCliente">
-      <soap:operation soapAction="#base_uri#/EliminaCliente" style="document" />
+      <soap:operation soapAction="#base_ns#/EliminaCliente" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -919,7 +919,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AggiornaCliente">
-      <soap:operation soapAction="#base_uri#/AggiornaCliente" style="document" />
+      <soap:operation soapAction="#base_ns#/AggiornaCliente" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -928,7 +928,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCodiciCliente">
-      <soap:operation soapAction="#base_uri#/SelezionaCodiciCliente" style="document" />
+      <soap:operation soapAction="#base_ns#/SelezionaCodiciCliente" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -937,7 +937,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaProduttore">
-      <soap:operation soapAction="#base_uri#/SelezionaProduttore" style="document" />
+      <soap:operation soapAction="#base_ns#/SelezionaProduttore" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -946,7 +946,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EliminaProduttore">
-      <soap:operation soapAction="#base_uri#/EliminaProduttore" style="document" />
+      <soap:operation soapAction="#base_ns#/EliminaProduttore" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -955,7 +955,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="InserisciProduttore">
-      <soap:operation soapAction="#base_uri#/InserisciProduttore" style="document" />
+      <soap:operation soapAction="#base_ns#/InserisciProduttore" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -964,7 +964,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AggiornaProduttore">
-      <soap:operation soapAction="#base_uri#/AggiornaProduttore" style="document" />
+      <soap:operation soapAction="#base_ns#/AggiornaProduttore" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -973,7 +973,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCodiciProduttore">
-      <soap:operation soapAction="#base_uri#/SelezionaCodiciProduttore" style="document" />
+      <soap:operation soapAction="#base_ns#/SelezionaCodiciProduttore" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -982,7 +982,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCategoria">
-      <soap:operation soapAction="#base_uri#/SelezionaCategoria" style="document" />
+      <soap:operation soapAction="#base_ns#/SelezionaCategoria" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -991,7 +991,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EliminaCategoria">
-      <soap:operation soapAction="#base_uri#/EliminaCategoria" style="document" />
+      <soap:operation soapAction="#base_ns#/EliminaCategoria" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1000,7 +1000,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="InserisciCategoria">
-      <soap:operation soapAction="#base_uri#/InserisciCategoria" style="document" />
+      <soap:operation soapAction="#base_ns#/InserisciCategoria" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1009,7 +1009,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCodiciCategoria">
-      <soap:operation soapAction="#base_uri#/SelezionaCodiciCategoria" style="document" />
+      <soap:operation soapAction="#base_ns#/SelezionaCodiciCategoria" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1018,7 +1018,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaMerceologia">
-      <soap:operation soapAction="#base_uri#/SelezionaMerceologia" style="document" />
+      <soap:operation soapAction="#base_ns#/SelezionaMerceologia" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1027,7 +1027,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EliminaMerceologia">
-      <soap:operation soapAction="#base_uri#/EliminaMerceologia" style="document" />
+      <soap:operation soapAction="#base_ns#/EliminaMerceologia" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1036,7 +1036,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="InserisciMerceologia">
-      <soap:operation soapAction="#base_uri#/InserisciMerceologia" style="document" />
+      <soap:operation soapAction="#base_ns#/InserisciMerceologia" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1045,7 +1045,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCodiciMerceologia">
-      <soap:operation soapAction="#base_uri#/SelezionaCodiciMerceologia" style="document" />
+      <soap:operation soapAction="#base_ns#/SelezionaCodiciMerceologia" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1054,7 +1054,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaOrdineTestata">
-      <soap:operation soapAction="#base_uri#/SelezionaOrdineTestata" style="document" />
+      <soap:operation soapAction="#base_ns#/SelezionaOrdineTestata" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1063,7 +1063,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaOrdineRighe">
-      <soap:operation soapAction="#base_uri#/SelezionaOrdineRighe" style="document" />
+      <soap:operation soapAction="#base_ns#/SelezionaOrdineRighe" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1072,7 +1072,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaOrdiniNuovi">
-      <soap:operation soapAction="#base_uri#/SelezionaOrdiniNuovi" style="document" />
+      <soap:operation soapAction="#base_ns#/SelezionaOrdiniNuovi" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1081,7 +1081,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AggiornaOrdine">
-      <soap:operation soapAction="#base_uri#/AggiornaOrdine" style="document" />
+      <soap:operation soapAction="#base_ns#/AggiornaOrdine" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1090,7 +1090,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ImpostaOrdiniLetti">
-      <soap:operation soapAction="#base_uri#/ImpostaOrdiniLetti" style="document" />
+      <soap:operation soapAction="#base_ns#/ImpostaOrdiniLetti" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1099,7 +1099,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CaricaImmagine">
-      <soap:operation soapAction="#base_uri#/CaricaImmagine" style="document" />
+      <soap:operation soapAction="#base_ns#/CaricaImmagine" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1108,7 +1108,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AggiornaTabellaGenerica">
-      <soap:operation soapAction="#base_uri#/AggiornaTabellaGenerica" style="document" />
+      <soap:operation soapAction="#base_ns#/AggiornaTabellaGenerica" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1117,7 +1117,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="StartImport">
-      <soap:operation soapAction="#base_uri#/StartImport" style="document" />
+      <soap:operation soapAction="#base_ns#/StartImport" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1126,7 +1126,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="StopImport">
-      <soap:operation soapAction="#base_uri#/StopImport" style="document" />
+      <soap:operation soapAction="#base_ns#/StopImport" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1138,7 +1138,7 @@
   <wsdl:binding name="AzzurraWebServiceSoap12" type="tns:AzzurraWebServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="SelezionaArticolo">
-      <soap12:operation soapAction="#base_uri#/SelezionaArticolo" style="document" />
+      <soap12:operation soapAction="#base_ns#/SelezionaArticolo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1147,7 +1147,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EliminaArticolo">
-      <soap12:operation soapAction="#base_uri#/EliminaArticolo" style="document" />
+      <soap12:operation soapAction="#base_ns#/EliminaArticolo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1156,7 +1156,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="InserisciArticolo">
-      <soap12:operation soapAction="#base_uri#/InserisciArticolo" style="document" />
+      <soap12:operation soapAction="#base_ns#/InserisciArticolo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1165,7 +1165,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AggiornaArticolo">
-      <soap12:operation soapAction="#base_uri#/AggiornaArticolo" style="document" />
+      <soap12:operation soapAction="#base_ns#/AggiornaArticolo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1174,7 +1174,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCodiciArticolo">
-      <soap12:operation soapAction="#base_uri#/SelezionaCodiciArticolo" style="document" />
+      <soap12:operation soapAction="#base_ns#/SelezionaCodiciArticolo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1183,7 +1183,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AggiornaQtaDisponibileArticolo">
-      <soap12:operation soapAction="#base_uri#/AggiornaQtaDisponibileArticolo" style="document" />
+      <soap12:operation soapAction="#base_ns#/AggiornaQtaDisponibileArticolo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1192,7 +1192,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCliente">
-      <soap12:operation soapAction="#base_uri#/SelezionaCliente" style="document" />
+      <soap12:operation soapAction="#base_ns#/SelezionaCliente" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1201,7 +1201,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EliminaCliente">
-      <soap12:operation soapAction="#base_uri#/EliminaCliente" style="document" />
+      <soap12:operation soapAction="#base_ns#/EliminaCliente" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1210,7 +1210,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AggiornaCliente">
-      <soap12:operation soapAction="#base_uri#/AggiornaCliente" style="document" />
+      <soap12:operation soapAction="#base_ns#/AggiornaCliente" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1219,7 +1219,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCodiciCliente">
-      <soap12:operation soapAction="#base_uri#/SelezionaCodiciCliente" style="document" />
+      <soap12:operation soapAction="#base_ns#/SelezionaCodiciCliente" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1228,7 +1228,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaProduttore">
-      <soap12:operation soapAction="#base_uri#/SelezionaProduttore" style="document" />
+      <soap12:operation soapAction="#base_ns#/SelezionaProduttore" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1237,7 +1237,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EliminaProduttore">
-      <soap12:operation soapAction="#base_uri#/EliminaProduttore" style="document" />
+      <soap12:operation soapAction="#base_ns#/EliminaProduttore" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1246,7 +1246,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="InserisciProduttore">
-      <soap12:operation soapAction="#base_uri#/InserisciProduttore" style="document" />
+      <soap12:operation soapAction="#base_ns#/InserisciProduttore" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1255,7 +1255,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AggiornaProduttore">
-      <soap12:operation soapAction="#base_uri#/AggiornaProduttore" style="document" />
+      <soap12:operation soapAction="#base_ns#/AggiornaProduttore" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1264,7 +1264,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCodiciProduttore">
-      <soap12:operation soapAction="#base_uri#/SelezionaCodiciProduttore" style="document" />
+      <soap12:operation soapAction="#base_ns#/SelezionaCodiciProduttore" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1273,7 +1273,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCategoria">
-      <soap12:operation soapAction="#base_uri#/SelezionaCategoria" style="document" />
+      <soap12:operation soapAction="#base_ns#/SelezionaCategoria" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1282,7 +1282,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EliminaCategoria">
-      <soap12:operation soapAction="#base_uri#/EliminaCategoria" style="document" />
+      <soap12:operation soapAction="#base_ns#/EliminaCategoria" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1291,7 +1291,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="InserisciCategoria">
-      <soap12:operation soapAction="#base_uri#/InserisciCategoria" style="document" />
+      <soap12:operation soapAction="#base_ns#/InserisciCategoria" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1300,7 +1300,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCodiciCategoria">
-      <soap12:operation soapAction="#base_uri#/SelezionaCodiciCategoria" style="document" />
+      <soap12:operation soapAction="#base_ns#/SelezionaCodiciCategoria" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1309,7 +1309,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaMerceologia">
-      <soap12:operation soapAction="#base_uri#/SelezionaMerceologia" style="document" />
+      <soap12:operation soapAction="#base_ns#/SelezionaMerceologia" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1318,7 +1318,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="EliminaMerceologia">
-      <soap12:operation soapAction="#base_uri#/EliminaMerceologia" style="document" />
+      <soap12:operation soapAction="#base_ns#/EliminaMerceologia" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1327,7 +1327,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="InserisciMerceologia">
-      <soap12:operation soapAction="#base_uri#/InserisciMerceologia" style="document" />
+      <soap12:operation soapAction="#base_ns#/InserisciMerceologia" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1336,7 +1336,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaCodiciMerceologia">
-      <soap12:operation soapAction="#base_uri#/SelezionaCodiciMerceologia" style="document" />
+      <soap12:operation soapAction="#base_ns#/SelezionaCodiciMerceologia" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1345,7 +1345,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaOrdineTestata">
-      <soap12:operation soapAction="#base_uri#/SelezionaOrdineTestata" style="document" />
+      <soap12:operation soapAction="#base_ns#/SelezionaOrdineTestata" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1354,7 +1354,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaOrdineRighe">
-      <soap12:operation soapAction="#base_uri#/SelezionaOrdineRighe" style="document" />
+      <soap12:operation soapAction="#base_ns#/SelezionaOrdineRighe" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1363,7 +1363,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="SelezionaOrdiniNuovi">
-      <soap12:operation soapAction="#base_uri#/SelezionaOrdiniNuovi" style="document" />
+      <soap12:operation soapAction="#base_ns#/SelezionaOrdiniNuovi" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1372,7 +1372,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AggiornaOrdine">
-      <soap12:operation soapAction="#base_uri#/AggiornaOrdine" style="document" />
+      <soap12:operation soapAction="#base_ns#/AggiornaOrdine" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1381,7 +1381,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ImpostaOrdiniLetti">
-      <soap12:operation soapAction="#base_uri#/ImpostaOrdiniLetti" style="document" />
+      <soap12:operation soapAction="#base_ns#/ImpostaOrdiniLetti" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1390,7 +1390,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CaricaImmagine">
-      <soap12:operation soapAction="#base_uri#/CaricaImmagine" style="document" />
+      <soap12:operation soapAction="#base_ns#/CaricaImmagine" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1399,7 +1399,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="AggiornaTabellaGenerica">
-      <soap12:operation soapAction="#base_uri#/AggiornaTabellaGenerica" style="document" />
+      <soap12:operation soapAction="#base_ns#/AggiornaTabellaGenerica" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1408,7 +1408,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="StartImport">
-      <soap12:operation soapAction="#base_uri#/StartImport" style="document" />
+      <soap12:operation soapAction="#base_ns#/StartImport" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1417,7 +1417,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="StopImport">
-      <soap12:operation soapAction="#base_uri#/StopImport" style="document" />
+      <soap12:operation soapAction="#base_ns#/StopImport" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1433,5 +1433,5 @@
     <wsdl:port name="AzzurraWebServiceSoap12" binding="tns:AzzurraWebServiceSoap12">
       <soap12:address location="#base_uri#/?wsdl=1" />
     </wsdl:port>
-  </wsdl:service>
+  </wsdl:service>  
 </wsdl:definitions>

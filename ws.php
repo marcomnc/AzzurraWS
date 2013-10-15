@@ -625,29 +625,29 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
     public function StartImport() {
 myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
 
-			$hlp = new ImportAPI();
-			$uid = $hlp->Start();
-			$arr = new XmlOutPut;
-      $arr->setResponse(__FUNCTION__."Response");
-      $arr->setResult(__FUNCTION__."Result");
-      $arr->setHeder();
-      echo $arr->SimpleType($uid, __FUNCTION__);
-      die();
-    	
+        $hlp = new ImportAPI();
+        $uid = $hlp->Start();
+        $arr = new XmlOutPut;
+        $arr->setResponse(__FUNCTION__."Response");
+        $arr->setResult(__FUNCTION__."Result");
+        $arr->setHeder();
+        echo $arr->SimpleType($uid);
+        die();
+
     }
     
     public function StopImport($Uid) {
 myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
 
 
-			$hlp = new ImportAPI($Uid->ImportId);
-			$uid = $hlp->Stop();
-			$arr = new XmlOutPut;
-      $arr->setResponse(__FUNCTION__."Response");
-      $arr->setResult(__FUNCTION__."Result");
-      $arr->setHeder();
-      echo $arr->SimpleObject();
-      die();
+        $hlp = new ImportAPI();
+        $hlp->Stop($Uid->ImportId);
+        $arr = new XmlOutPut;
+        $arr->setResponse(__FUNCTION__."Response");
+        $arr->setResult(__FUNCTION__."Result");
+        $arr->setHeder();
+        echo $arr->SimpleObject();
+        die();
     	
     }
 }
@@ -662,7 +662,7 @@ function myLog($string, $type, $file = "", $force = true) {
     
 }
 
-ini_set('zlib.output_compression','On');
+//ini_set('zlib.output_compression','On');
 
 	
 if ( isset($_GET['wsdl']) && $_GET['wsdl'] == 'ori') {
@@ -672,7 +672,7 @@ if ( isset($_GET['wsdl']) && $_GET['wsdl'] == 'ori') {
     $autodiscover->setClass("AzzurraWebServiceSoap");
     $autodiscover->handle();    
 } elseif ( isset($_GET['wsdl']) && $_GET['wsdl'] == 'info') {
-	phpinfo();
+    phpinfo();
 } elseif (isset($_GET['wsdl']) && $_myrequest."" == "") {
     header('Content-type: text/xml', true, 200);    
     $wsdl = new WSDL; 
@@ -680,8 +680,8 @@ if ( isset($_GET['wsdl']) && $_GET['wsdl'] == 'ori') {
     echo $wsdl->getWSDL();
     die();
 } else {
-		DbAPI::dbInit();
-    $soap = new Zend_Soap_Server(WSDL::getBaseUri() . '?wsdl=1', array('cache_wsdl' => false));
+    DbAPI::dbInit();
+    $soap = new Zend_Soap_Server(WSDL::getBaseUri() . '/ws.php?wsdl=1', array('cache_wsdl' => false));
     $soap->setSoapVersion(SOAP_1_2);
     $soap->setClass("AzzurraWebServiceSoap");
     $soap->handle();

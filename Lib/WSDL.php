@@ -12,6 +12,7 @@ class WSDL {
     public function getWSDL() {
         if ($this->_wsdl == "") {
             $this->_setWSDLfromFile();
+            //$this->_setWSDL();
         }
         return $this->_wsdl;
     }
@@ -42,8 +43,10 @@ class WSDL {
 			$wsdl = file_get_contents($this->_filename);
 			
 			$baseUri = self::getBaseUri();
+                        //$baseNs = 'http://keypass.it/azzurra';
+                        $baseNs = self::getBaseUri();
 
-			$this->_wsdl = '<?xml version="1.0" encoding="utf-8"?>' . "\n" . str_replace("#base_uri#", $baseUri, $wsdl);
+			$this->_wsdl = '<?xml version="1.0" encoding="utf-8"?>' . "\n" . str_replace("#base_uri#", $baseUri, str_replace("#base_ns#", $baseNs, $wsdl));
 			
 		}
     

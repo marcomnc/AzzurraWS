@@ -26,9 +26,9 @@ class XmlOutPut {
     }
         
     public function setResponse($response) {
-        $this->_response['open'] = "<$response xmlns=\"" . WSDL::getBaseUri() ."\">";
+        $this->_response['open'] = "<$response xmlns=\"" . WSDL::getBaseUri() ."/\">";
         $this->_response['close'] = "</$response>";
-        $this->_response['4null'] = "<$response xmlns=\"" . WSDL::getBaseUri() . "\" />";
+        $this->_response['4null'] = "<$response xmlns=\"" . WSDL::getBaseUri() . "/\" />";
     }
     
     public function setResult($result) {
@@ -46,8 +46,8 @@ class XmlOutPut {
         
     }
     
-    public function SimpleType($value, $name) {
-    	$_body .= "<$name>$value</$name>";
+    public function SimpleType($value) {
+    	$_body .= "$value";
     	return $this->_setOutPut(($_body));
     }
     
@@ -114,7 +114,6 @@ myLog($_out, Zend_Log::DEBUG, "", true);
         header('Content-type: text/xml', true, 200);
         header('Cache-Control:private, max-age=0');
         header('Content-Type:text/xml; charset=utf-8');
-	header('Content-Encoding: gzip');
         //header('Set-Cookie:.ASPXANONYMOUS=ztnn_EjozQEkAAAANWNmNDNiMDgtNjM0ZC00OGJkLThkZWEtZDUyZThiYWYwMzA10; expires=Tue, 01-Jan-2015 17:54:04 GMT; path=/; HttpOnly');
         header('Server:Microsoft-IIS/7.5');
         header('X-AspNet-Version:2.0.50727');

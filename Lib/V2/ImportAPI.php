@@ -1,6 +1,6 @@
 <?php
 	  
-  require_once("Lib/db/DbAPI.php");
+  require_once("Lib/Db/DbAPI.php");
   
   class ImportAPI
   {
@@ -27,7 +27,7 @@
   	public function Stop($uid) {
   		
   		$importSession = $this->getSession($uid);
-  		
+		
   		if ($importSession) {
   		  $importSession['EndDate'] = DbAPI::MySqlDateTime();
   		  
@@ -46,7 +46,7 @@
   	
   	public function getSession($uid = "") {
   		
-  		if ($uid = "") {
+  		if ($uid == "") {
     		$uid = $_SERVER['REMOTE_ADDR'] . "-%";
     		
     		foreach (getallheaders() as $key => $value) {

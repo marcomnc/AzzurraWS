@@ -1,4 +1,4 @@
-drop table `AV_Import`;
+-- drop table `AV_Import`;
 
 CREATE  TABLE `AV_Import` (
   `Id` INT NOT NULL AUTO_INCREMENT ,
@@ -16,7 +16,7 @@ CREATE  TABLE `AV_Import` (
   UNIQUE INDEX `UID_UNIQUE` (`UID` ASC) )
 COMMENT = 'Tabella imporrazioni Azzurra Vini';
 
-drop table `AV_Import_Delete`;
+-- drop table `AV_Import_Delete`;
 
 CREATE  TABLE `AV_Import_Delete` (
   `Id` INT NOT NULL AUTO_INCREMENT ,
@@ -30,7 +30,7 @@ CREATE  TABLE `AV_Import_Delete` (
   UNIQUE INDEX `UID_PROD` (`UID` ASC, `IdGestionale` ASC) )
 COMMENT = 'Tabella per iportazione azzurra contente gli articoli da cancellare';
 
-drop table `AV_Import_Insert`;
+-- drop table `AV_Import_Insert`;
 
 CREATE  TABLE `AV_Import_Insert` (
   `Id` INT NOT NULL AUTO_INCREMENT ,
@@ -46,7 +46,7 @@ CREATE  TABLE `AV_Import_Insert` (
   UNIQUE INDEX `UID_PROD_UPD` (`UID` ASC, `IdGestionale` ASC) )
 COMMENT = 'Tabella per iportazione azzurra contente gli articoli da Inserire/Aggiornare';
 
-drop table `AV_Import_Image`;
+-- drop table `AV_Import_Image`;
 
 CREATE  TABLE `AV_Import_Image` (
   `Id` INT NOT NULL AUTO_INCREMENT ,
@@ -62,23 +62,23 @@ CREATE  TABLE `AV_Import_Image` (
 COMMENT = 'Tabella per iportazione azzurra contente le immagini';
 
 
-ALTER TABLE `av_import_delete` 
+ALTER TABLE `AV_Import_Delete` 
   ADD CONSTRAINT `IMP_DELETE`
   FOREIGN KEY (`IdImport` )
-  REFERENCES `av_import` (`Id` )
+  REFERENCES `AV_Import` (`Id` )
   ON DELETE CASCADE
   ON UPDATE NO ACTION;
 
-ALTER TABLE `av_import_insert` 
+ALTER TABLE `AV_Import_Insert` 
   ADD CONSTRAINT `IMP_UPD`
   FOREIGN KEY (`IdImport` )
-  REFERENCES `av_import` (`Id` )
+  REFERENCES `AV_Import` (`Id` )
   ON DELETE CASCADE
   ON UPDATE NO ACTION;
 
-ALTER TABLE `av_import_image` 
+ALTER TABLE `AV_Import_Image` 
   ADD CONSTRAINT `IMP_IMG`
   FOREIGN KEY (`IdImport` )
-  REFERENCES `av_import` (`Id` )
+  REFERENCES `AV_Import` (`Id` )
   ON DELETE CASCADE
   ON UPDATE NO ACTION;

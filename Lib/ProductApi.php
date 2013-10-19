@@ -347,7 +347,7 @@ try {
         return $fileName;
     }
     
-    private function _getIdbyImage($imgName, $imgType = 1) {
+    public function _getIdbyImage($imgName, $imgType = 1) {
 
         $id = "";    
         $select = $this->_helper->getDbReader()->select()

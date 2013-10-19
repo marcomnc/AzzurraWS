@@ -108,7 +108,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      */
     public function AggiornaArticolo($articolo) {
 myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
-        $api = new ProductApi();        
+        $api = new ProductAPIAsync();        
         $api->inserisciArticolo($articolo->articolo);
         $arr = new XmlOutPut;
         $arr->setResponse(__FUNCTION__."Response");
@@ -600,9 +600,13 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      */
     public function CaricaImmagine($NomeFileImmagine, $DatiImmagineInBase64) {
 myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
-        $hlp = new ProductApi();   
+//        $hlp = new ProductApi();   
+//        
+//        $hlp->caricaImmagine($NomeFileImmagine->NomeFileImmagine, $NomeFileImmagine->DatiImmagineInBase64);
         
+        $hlp = new ProductAPIAsync();   
         $hlp->caricaImmagine($NomeFileImmagine->NomeFileImmagine, $NomeFileImmagine->DatiImmagineInBase64);
+        
         $arr = new XmlOutPut;
         $arr->setResponse(__FUNCTION__."Response");
         $arr->setResult(__FUNCTION__."Result");

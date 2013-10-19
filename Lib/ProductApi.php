@@ -106,7 +106,7 @@ class ProductApi {
         }
         
         $stock = array();
-        if (property_exists($productInfo, "QtaDisponibile") && $productInfo->QtaDisponibile != 0) {
+        if (property_exists($productInfo, "QtaDisponibile") && $productInfo->QtaDisponibile > 0) {
             $stock['qty'] = $productInfo->QtaDisponibile;
             if ($productInfo->QtaDisponibile > 0) 
                 $stock['is_in_stock'] = 1;

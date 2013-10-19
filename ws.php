@@ -13,10 +13,10 @@ ini_set("error_log", __DIR__ . DIRECTORY_SEPARATOR ."error.log");
 
 $_myrequest = file_get_contents('php://input');
 if ($_myrequest."" != "") {
-	myLog(getallheaders(), Zend_Log::DEBUG, "AzzurraWS.log", true);
-	myLog($_myrequest, Zend_Log::DEBUG, "AzzurraWS.log", true);
-	//myLog($_SESSION, Zend_Log::DEBUG, "AzzurraWS.log", true);	
-	//myLog($_SERVER, Zend_Log::DEBUG, "AzzurraWS.log", true);
+	myLog(getallheaders(), Zend_Log::DEBUG);
+	myLog($_myrequest, Zend_Log::DEBUG);
+	//myLog($_SESSION, Zend_Log::DEBUG);	
+	//myLog($_SERVER, Zend_Log::DEBUG);
 }
 
 require_once("Zend/Soap/Server.php");
@@ -71,7 +71,7 @@ class AzzurraWebServiceSoap {
      * @return ArticoloInfo 
      */
     public function SelezionaArticolo($productId) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);       
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);       
         $api = new ProductApi();
         $productInfo = $api->selezionaArticolo($productId->ArticoloId);        
         $arr = new XmlOutPut;
@@ -88,7 +88,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @param ArticoloInfo $articolo 
      */
     public function InserisciArticolo($articolo) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
         $api = new ProductAPIAsync();        
         $api->inserisciArticolo($articolo->articolo);
         $arr = new XmlOutPut;
@@ -106,7 +106,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @param ArticoloInfo $articolo 
      */
     public function AggiornaArticolo($articolo) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $api = new ProductAPIAsync();        
         $api->inserisciArticolo($articolo->articolo);
         $arr = new XmlOutPut;
@@ -124,7 +124,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @param int $nuovaQta 
      */
     public function AggiornaQtaDisponibileArticolo($idArticolo) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $api = new ProductApi();
         $api->aggiornaQta($idArticolo->idArticolo, $idArticolo->nuovaQta);
         $arr = new XmlOutPut;
@@ -141,7 +141,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @param type $idArticolo 
      */
     public function EliminaArticolo($ArticoloId) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
         $api = new ProductAPIAsync();
         $api->eliminaArticolo($ArticoloId->ArticoloId);
         $arr = new XmlOutPut;
@@ -158,7 +158,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return ArrayOfInt 
      */
     public function SelezionaOrdiniNuovi() {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $hlp = new SalesApi();
         $listaOrdini = $hlp->getList();
         $arr = new XmlOutPut;
@@ -176,7 +176,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return OrdineTestataInfo
      */
     public function SelezionaOrdineTestata($idOrdine) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $hlp = new SalesApi();
         $testataInfo = $hlp->getTestata($idOrdine->idOrdine, false);
         $arr = new XmlOutPut;
@@ -194,7 +194,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return OrdineRigaInfo
      */
     public function SelezionaOrdineRighe($idOrdine) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $hlp = new SalesApi();
         $rows = $hlp->getRighe($idOrdine->idOrdine);
         $arr = new XmlOutPut;
@@ -212,7 +212,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return null
      */
     public function ImpostaOrdiniLetti($elencoOrdini) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $hlp = new SalesApi();
         $orderList = array();
         if (!is_array($elencoOrdini->elencoOrdini->int)) {
@@ -238,8 +238,8 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return null
      */
     public function AggiornaOrdine($ordineTestata) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
-myLog($ordineTestata, Zend_Log::DEBUG, "AzzurraWS.log", true);
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
+myLog($ordineTestata, Zend_Log::DEBUG);
         
         $arr = new XmlOutPut;
         $arr->setResponse(__FUNCTION__."Response");
@@ -254,7 +254,7 @@ myLog($ordineTestata, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return int[]
      */
     public function SelezionaCodiciArticolo() {     
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $retList = array();
         $prod = Mage::getModel("catalog/product")->getCollection()
                     ->addAttributeToFilter("status", 1);
@@ -273,7 +273,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
     }
     
     public function SelezionaCodiciProduttore () {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $api = new AnagraficheAPI();
         $retVal = $api->selezionaCodiciProduttore();
         $arr = new XmlOutPut;
@@ -291,7 +291,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @param string $Codice 
      */
     public function EliminaProduttore($Codice) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $api = new AnagraficheAPI();
         $api->removeProduttore($Codice->Codice);
         $arr = new XmlOutPut;
@@ -309,7 +309,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return null
      */
     public function AggiornaProduttore ($produttore) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $this->InserisciProduttore($produttore);
         $arr = new XmlOutPut;
         $arr->setResponse(__FUNCTION__."Response");
@@ -325,7 +325,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @param ProduttoreInfo $produttore
      */
     public function InserisciProduttore($produttore) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
         $api = new AnagraficheAPI();
         if (!property_exists($produttore->produttore, "Name")) {
             $produttore->produttore->Name = "";
@@ -355,7 +355,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return ProduttoreInfo 
      */
     public function SelezionaProduttore($Codice) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $api = new AnagraficheAPI();
         $produttoreInfo = $api->selezionaProduttore($Codice->Codice);
         $arr = new XmlOutPut;
@@ -373,7 +373,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return ArrayOfInt
      */
     public function SelezionaCodiciCliente () {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $retList = array();
         $clienti = Mage::getModel("customer/customer")->getCollection();
         foreach ($clienti as $cli) {
@@ -392,7 +392,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @param string $ClienteId 
      */
     public function SelezionaCliente($ClienteId) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $api = new AnagraficheAPI();
         $cliente = $api->selezionaCliente($ClienteId->ClienteId);
         $arr = new XmlOutPut;
@@ -410,7 +410,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return null
      */
     public function EliminaCliente($ClienteId) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $cliente = Mage::getModel("customer/customer")->Load($ClienteId->ClienteId);
         if (!is_null($cliente)) {
             //@todo non funziona
@@ -432,9 +432,9 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return null
      */
     public function AggiornaCliente($ClienteInfo) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
-        myLog("@todo Aggiornamento cliente", Zend_Log::DEBUG, "AzzurraWS.log", true);
-        myLog($ClienteInfo, Zend_Log::DEBUG, "AzzurraWS.log", true);
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
+        myLog("@todo Aggiornamento cliente", Zend_Log::DEBUG);
+        myLog($ClienteInfo, Zend_Log::DEBUG);
         if (property_exists($ClienteInfo->cliente, "IDAnagrafica") && isset($ClienteInfo->cliente->IDAnagrafica)) {            
             $cliente = Mage::getModel("customer/customer")->Load($ClienteInfo->cliente->IDAnagrafica);
             if (!is_null($cliente)) {
@@ -456,7 +456,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return ArrayOfInt 
      */
     public function SelezionaCodiciCategoria() {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
         $hlp = new CategoryApi();
         $listaOrdini = $hlp->selezionaCodiciCategoria();
         $arr = new XmlOutPut;
@@ -474,7 +474,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return CategoriaInfo
      */
     public function SelezionaCategoria($CategoriaId) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
         $hlp = new CategoryApi();
         $categoriaInfo = $hlp->selezionaCategoria($CategoriaId->CategoriaId);
         $arr = new XmlOutPut;
@@ -492,7 +492,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @param int $CategoriaId 
      */
     public function EliminaCategoria($CategoriaId) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
         $hlp = new CategoryApi();
         $hlp->eliminaCategoria($CategoriaId->CategoriaId, TIPO_CATEGORIA);
         $arr = new XmlOutPut;
@@ -510,7 +510,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return null
      */
     public function InserisciCategoria($categoria) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
         $hlp = new CategoryApi();
         $hlp->inserisciCategoria($categoria->categoria);
         $arr = new XmlOutPut;
@@ -527,7 +527,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return ArrayOfInt 
      */
     public function SelezionaCodiciMerceologia() {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $hlp = new CategoryApi();
         $listaMerceologia = $hlp->selezionaCodiciMerceologia();
         $arr = new XmlOutPut;
@@ -545,7 +545,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return CategoriaInfo
      */
     public function SelezionaMerceologia($MerceologiaId) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $hlp = new CategoryApi();
         $categoriaInfo = $hlp->selezionaCategoria($MerceologiaId->MerceologiaId, TIPO_MERCEOLOGIA);
         $arr = new XmlOutPut;
@@ -563,7 +563,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @param int $MerceologiaId 
      */
     public function EliminaMerceologia($MerceologiaId) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $hlp = new CategoryApi();
         $hlp->eliminaCategoria($MerceologiaId->MerceologiaId, TIPO_MERCEOLOGIA);
         $arr = new XmlOutPut;
@@ -581,7 +581,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @return null
      */
     public function InserisciMerceologia ($merceologia) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);        
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $hlp = new CategoryApi();  
         $hlp->inserisciCategoria($merceologia->merceologia, TIPO_MERCEOLOGIA);
         $arr = new XmlOutPut;
@@ -598,7 +598,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      * @param string $DatiImmagineInBase64 
      */
     public function CaricaImmagine($NomeFileImmagine, $DatiImmagineInBase64) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
 //        $hlp = new ProductApi();   
 //        
 //        $hlp->caricaImmagine($NomeFileImmagine->NomeFileImmagine, $NomeFileImmagine->DatiImmagineInBase64);
@@ -617,7 +617,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
     }
     
     public function AggiornaTabellaGenerica($tabellaGenerica) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
         $hlp = new AttributeApi();
         $hlp->AggiornaTabellaGenerica($tabellaGenerica);
         $arr = new XmlOutPut;
@@ -630,7 +630,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
     }
     
     public function StartImport() {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
 
         $hlp = new ImportAPI();
         $uid = $hlp->Start();
@@ -644,7 +644,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
     }
     
     public function StopImport($Uid) {
-myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
+myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
 
 
         $hlp = new ImportAPI();
@@ -661,10 +661,21 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
 
 function myLog($string, $type, $file = "", $force = true) {
     
-    if (Zend_Log::ERR == $type) {
-        Mage::Log($string, $type, "AzzurraWS-ERROR-". date("ymd") .".log", true);
+    if ($file == "") {
+        if (Zend_Log::ERR == $type) {
+            Mage::Log($string, $type, "AzzurraWS-ERROR-". date("ymd") .".log", true);
+        } else {
+            Mage::Log($string, $type, "AzzurraWS-". date("ymd") .".log", true);
+        }
     } else {
-        Mage::Log($string, $type, "AzzurraWS-". date("ymd") .".log", true);
+        if (preg_match("/\./", $file)) {
+
+            $fileEx = preg_split("/\./", $file);
+            $file = preg_replace("/\." . $fileEx[sizeof($fileEx)-1] ."/", "-" . date("ymd") . "." . $fileEx[sizeof($fileEx)-1], $file);
+        } else {
+            $file .= date("ymd") .".log";
+        }
+        Mage::Log($string, $type, $file, true);
     }
     
 }
@@ -686,6 +697,20 @@ if ( isset($_GET['wsdl']) && $_GET['wsdl'] == 'ori') {
        
     echo $wsdl->getWSDL();
     die();
+} elseif (isset ($_GET['___execute_batch'])) {
+    DbAPI::dbInit();
+    if ($_GET['___execute_batch']) {
+        
+        ignore_user_abort();
+        set_time_limit(0);
+        
+        $asyncAPI = new ImportAPI();
+        $asyncAPI->batch($_GET['___execute_batch']);
+        die();
+    }        
+    
+    echo "specificare una sessione prima elaboare i dati";
+    
 } else {
     DbAPI::dbInit();
     $soap = new Zend_Soap_Server(WSDL::getBaseUri() . '/ws.php?wsdl=1', array('cache_wsdl' => false));

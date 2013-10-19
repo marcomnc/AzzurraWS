@@ -77,7 +77,7 @@ class AttributeApi {
              */
             Mage::app()->cleanCache(array(Mage_Core_Model_Translate::CACHE_TAG));
         } catch  (Exception $e) {
-            myLog($e, Zend_Log::ERR, "AzzurraWS.log", true);  
+            myLog($e, Zend_Log::ERR);  
             throw new Exception($e->getMessage() . "\nTabella  ". $tabellaGenerica->IDTabella() . "/" . $tabellaGenerica->Codice . "/" . $tabellaGenerica->Descrzione);
         }
     }

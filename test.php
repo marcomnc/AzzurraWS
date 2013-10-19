@@ -14,54 +14,20 @@ echo "<pre>";
 error_reporting(E_ALL);
 ini_set("display_errors",1 );
 
-$categories = Mage::getModel('catalog/category')->getCollection();
+$file = "Async.pippo.log";
+echo date("ymd");
+if (preg_match("/\./", $file)) {
 
-/**
- * Category list
+    $fileEx = preg_split("/\./", $file);
 echo "<pre>";
-
-foreach ($categories as $cat) {
-
-    $category = Mage::getModel('catalog/category')->Load($cat->getId());
-
-    echo '' . $category->getId() . ';';
-    echo '' .$category->getName() . ';';
-    echo '' .$category->getPosition() . ';';
-    echo '' .$category->getLevel() . ';';
-    echo '' .$category->getAvTipo() . ';';
-    echo '' .$category->getAvCodice() . ';';
-    echo '' .$category->getAvParent() . ';';
-    echo "\n";
-
+print_r($fileEx);
+    $file = preg_replace("/\." . $fileEx[sizeof($fileEx)-1] ."/", "-" . date("ymd") . "." . $fileEx[sizeof($fileEx)-1], $file);
+} else {
+    $file .= date("ymd") .".log";
 }
-*/
 
-/**
- * Prodotti senza immagini
-foreach (Mage::getModel('catalog/product')->getCollection() as $prod) {
-    $product = Mage::getModel('catalog/product')->Load($prod->getId());
-    
-    if ($product->getImage() == "" || $product->getImage() == "no_image")
-        echo $product->getSku() . " - " . $product->getImage() . "<br>";
-    
-}
-*/
+echo $file;
 
-$order_details = Mage::getModel('sales/order')->loadByIncrementId('100000061');
-print_r($order_details->getdata());
-
-foreach (Mage::getModel('customer/customer')->getCollection() as $cli) {
-    
-    $cliente = Mage::getModel('customer/customer')->Load($cli->getId());
-    
-    print_r($cliente->getData());
-    $billing = Mage::getModel("customer/Address")->Load($cliente->getDefaultBilling());
-    if (!is_null($billing)) {
-	print_r($billing->getData());
-    }
-    
-    
-}
 
 ?>
     

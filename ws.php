@@ -36,8 +36,7 @@ require_once("DataType/Constant.php");
 
 require_once("Lib/Db/DbAPI.php");
 require_once("Lib/V2/ImportAPI.php");
-
-require_once("Lib/ProductAPIAsync.php");
+require_once("Lib/V2/ProductAPIAsync.php");
 
 require_once("Lib/ProductApi.php");
 require_once("Lib/AttributeApi.php");
@@ -90,7 +89,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
      */
     public function InserisciArticolo($articolo) {
 myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG, "AzzurraWS.log", true);
-        $api = new ProductApi();        
+        $api = new ProductAPIAsync();        
         $api->inserisciArticolo($articolo->articolo);
         $arr = new XmlOutPut;
         $arr->setResponse(__FUNCTION__."Response");

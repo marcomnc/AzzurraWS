@@ -1,7 +1,10 @@
 <?php
 
 class WSDL {
-    //put your code here
+    
+    const NAME_SPACE = "http://www.azzurra.it/externalWs/AzzurraWS";
+    
+//put your code here
     private $_wsdl = '';
     private $_filename = '';
     
@@ -27,7 +30,7 @@ class WSDL {
 			}
 			
 			$scripts = preg_split("/\//", $_SERVER['REQUEST_URI']);
-      $baseUri = "";
+                         $baseUri = "";
 			for ($i = 0; $i < sizeof($scripts)-1; $i++) {
 				if ($scripts[$i] != "")
 					$baseUri .= "/" . $scripts[$i];
@@ -43,8 +46,8 @@ class WSDL {
 			$wsdl = file_get_contents($this->_filename);
 			
 			$baseUri = self::getBaseUri();
-                        //$baseNs = 'http://keypass.it/azzurra';
-                        $baseNs = self::getBaseUri();
+                        $baseNs = self::NAME_SPACE;
+                        //$baseNs = self::getBaseUri();
 
 			$this->_wsdl = '<?xml version="1.0" encoding="utf-8"?>' . "\n" . str_replace("#base_uri#", $baseUri, str_replace("#base_ns#", $baseNs, $wsdl));
 			

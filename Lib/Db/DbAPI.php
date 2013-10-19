@@ -74,11 +74,12 @@ class DbAPI
 		$orderBy = "";
 		if (!is_null($order) && is_array($order) && sizeof($order) > 0) {			
 		  foreach ($order as $field => $ord) {
-		    $orderBy .= ($orderBy == "") ? ", ": "";
+		    $orderBy .= ($orderBy != "") ? ", ": "";
 		    $orderBy .= "$field $ord";
 		  }
 		}
 		
+                $orderBy = ($orderBy != "") ? "\nORDER BY $orderBy" : "";
 		
 		$select = "SELECT $columns \nFROM $tName \nWHERE 1=1 \n$where $orderBy";
 		try {

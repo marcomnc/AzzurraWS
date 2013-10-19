@@ -64,7 +64,7 @@
                       "EndDate" =>  array( 'operator' => 'AND',
                                              'comp'     => 'is null'));
                                              
-  		$session = DbAPI::GetTable("AV_Import", $aprams); 		
+  		$session = DbAPI::GetTable("AV_Import", $aprams, array(), array("StartDate" => "DESC")); 		
   		
   		return (isset($session[0])) ? $session[0]: $session;
   		

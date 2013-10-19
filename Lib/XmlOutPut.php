@@ -26,9 +26,9 @@ class XmlOutPut {
     }
         
     public function setResponse($response) {
-        $this->_response['open'] = "<$response xmlns=\"" . WSDL::getBaseUri() ."/\">";
+        $this->_response['open'] = "<$response xmlns=\"" . WSDL::NAME_SPACE ."/\">";
         $this->_response['close'] = "</$response>";
-        $this->_response['4null'] = "<$response xmlns=\"" . WSDL::getBaseUri() . "/\" />";
+        $this->_response['4null'] = "<$response xmlns=\"" . WSDL::NAME_SPACE . "/\" />";
     }
     
     public function setResult($result) {

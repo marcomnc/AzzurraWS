@@ -599,12 +599,12 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
      */
     public function CaricaImmagine($NomeFileImmagine, $DatiImmagineInBase64) {
 myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
-//        $hlp = new ProductApi();   
-//        
-//        $hlp->caricaImmagine($NomeFileImmagine->NomeFileImmagine, $NomeFileImmagine->DatiImmagineInBase64);
+        $hlp = new ProductApi();   
         
-        $hlp = new ProductAPIAsync();   
         $hlp->caricaImmagine($NomeFileImmagine->NomeFileImmagine, $NomeFileImmagine->DatiImmagineInBase64);
+        
+//        $hlp = new ProductAPIAsync();   
+//        $hlp->caricaImmagine($NomeFileImmagine->NomeFileImmagine, $NomeFileImmagine->DatiImmagineInBase64);
         
         $arr = new XmlOutPut;
         $arr->setResponse(__FUNCTION__."Response");

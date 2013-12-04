@@ -272,15 +272,10 @@ try {
 //myLog($this->_tmpBaseDir .$fileName[0]);        
         //file_put_contents($this->_tmpBaseDir  .$fileName[0], base64_decode($imgBase64));        
         $this->_mediaApi = Mage::getModel("catalog/product_attribute_media_api");
-        $id = $this->_getIdbyImage($imgName, 1);
+        $id = $this->_getIdbyImage($fileName);
         if ($id."" != "" ) {
             $this->_setImage($id, 1, $fileName, $imgBase64);
-        } else {
-            $id = $this->_getIdbyImage($imgName, 1);
-            if ($id."" != "" ) {
-                $this->_setImage($id, 2, $fileName, $imgBase64);
-            }
-        }
+        } 
     }
     
     private function _setImage($id, $imgType, $imgFile, $imgBase64) {
@@ -352,23 +347,12 @@ try {
         return $fileName;
     }
     
-    public function _getIdbyImage($imgName, $imgType = 1) {
+    public function _getIdbyImage($imgName) {
 
         $id = "";    
-        $select = $this->_helper->getDbReader()->select()
-                       ->from(array('ea' => Mage::getSingleton('core/resource')->getTableName('eav_attribute')))
-                       ->join(array('pv' => Mage::getSingleton('core/resource')->getTableName('catalog_product_entity_varchar')),
-                              'ea.attribute_id = pv.attribute_id')
-                       ->where("ea.attribute_code like 'av_img$imgType'")
-                       ->where("pv.entity_type_id = 4")
-                       ->where("pv.store_id = 0")
-                       ->where("pv.value = ?",$imgName)
-                       ->reset(Zend_Db_Select::COLUMNS)
-                       ->columns(array('productId'   => 'pv.entity_id'));
-        $id = $this->_helper->getDbReader()->fetchOne($select);
-        if ($id."" == "") {
-            $prdSku = explode(".", $imgName);
-            $id = Mage::getModel("catalog/product")->getIdBySku($prdSku[0]);
+        if (is_array($imgName) && isset($imgName[0])) {
+            $id = Mage::getModel("catalog/product")->getIdBySku($imgName[0]);
+            
         }
         return $id;
     }

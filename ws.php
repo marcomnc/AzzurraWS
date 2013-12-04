@@ -1,5 +1,5 @@
 <?php
- 
+
 ini_set("soap.wsdl_cache_enabled", 0); 
 define("MAGE_BASE_DIR", "..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR);
 define("BASE_STORE", 1);

@@ -150,12 +150,17 @@ try {
             $_price = $productInfo->PrezzoPromozione + 0;
             if ($_price > 0) {
                 $product->setSpecialPrice($productInfo->PrezzoPromozione + 0);
-                $product->setAvPromozione(1); 
-                $product->setSpecialFromDate(Mage::app()->getLocale()->date()->toString(Varien_Date::DATETIME_INTERNAL_FORMAT));
-                $product->getSpecialToDate("");
+		// é sempre il flag promozione che comanda
+                //$product->setAvPromozione(1); 
+		if ($product->getAvPromozione() == 1) {
+	                $product->setSpecialFromDate(Mage::app()->getLocale()->date()->toString(Varien_Date::DATETIME_INTERNAL_FORMAT));
+        	        $product->getSpecialToDate("");
+		}
+
             } else {
                 $product->setSpecialPrice(null);
-                $product->setAvPromozione(0); 
+		// é sempre il flag promozione che comanda
+                //$product->setAvPromozione(0); 
                 $product->setSpecialFromDate("");
                 $product->setSpecialToDate("");
             }

@@ -2,7 +2,8 @@
 
 class WSDL {
     
-    const NAME_SPACE = "http://www.azzurra.it/externalWs/AzzurraWS";
+    //const NAME_SPACE = "http://www.azzurra.it/externalWs/AzzurraWS";
+	const NAME_SPACE =  "http://keypass.it/azzurra";
     
 //put your code here
     private $_wsdl = '';

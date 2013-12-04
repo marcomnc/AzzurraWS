@@ -153,7 +153,8 @@ myLog("$updateDelete", Zend_Log::DEBUG);
             $updateStock  = "update " . Mage::getSingleton('core/resource')->getTableName('cataloginventory_stock_item') ." item \n";
             $updateStock  .= "join catalog_product_entity_varchar prod on item.product_id = prod.entity_id \n";
             $updateStock  .= "join AV_Import_Insert on prod.attribute_id = " . self::EAV_PROD_IDGESTIONALE . " and prod.store_id = 0 and prod.value = AV_Import_Insert.idGestionale \n";
-            $updateStock  .= "set item.qty = AV_Import_Insert.QtaNew \n";
+            $updateStock  .= "set item.qty = AV_Import_Insert.QtaNew, \n";
+	    $updateStock  .= "is_in_stock = IF(AV_Import_Insert.QtaNew > 0, 1, 0) \n";
             $updateStock  .= "where UID = '$UID'";
             
             $updateStockStatus  = "update " . Mage::getSingleton('core/resource')->getTableName('cataloginventory_stock_status') ." item \n";
@@ -208,7 +209,7 @@ myLog("Finito di importare " . $myProduct->CodiceArticolo, Zend_Log::DEBUG, "Azz
 myLog("FINITO DI IMPORTARE SESSIONE " . $mySession['UID'], Zend_Log::DEBUG, "Azzurra.Async.log");                       
                 }
                 
-                $mySession['ElabArtEnd'] = DbAPI::MySqlDateTime();
+                $mySession['ElabArtStart'] = DbAPI::MySqlDateTime();
                 DbAPI::SaveTable("AV_Import", $mySession, array('Id'));
                 
             } else {

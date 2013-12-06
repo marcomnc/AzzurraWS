@@ -13,8 +13,8 @@ ini_set("error_log", __DIR__ . DIRECTORY_SEPARATOR ."error.log");
 
 $_myrequest = file_get_contents('php://input');
 if ($_myrequest."" != "") {
-	myLog(getallheaders(), Zend_Log::DEBUG);
-	myLog($_myrequest, Zend_Log::DEBUG);
+//	myLog(getallheaders(), Zend_Log::DEBUG);
+//	myLog($_myrequest, Zend_Log::DEBUG);
 	//myLog($_SESSION, Zend_Log::DEBUG);	
 	//myLog($_SERVER, Zend_Log::DEBUG);
 }
@@ -597,10 +597,9 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
      * @param string $NomeFileImmagine
      * @param string $DatiImmagineInBase64 
      */
-    public function CaricaImmagine($NomeFileImmagine, $DatiImmagineInBase64) {
+    public function CaricaImmagine($NomeFileImmagine) {
 myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
-        $hlp = new ProductApi();   
-        
+        $hlp = new ProductApi();           
         $hlp->caricaImmagine($NomeFileImmagine->NomeFileImmagine, $NomeFileImmagine->DatiImmagineInBase64);
         
 //        $hlp = new ProductAPIAsync();   
@@ -659,7 +658,7 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
     }
 }
 
-function myLog($string, $type, $file = "", $force = true) {
+function myLog($string, $type = Zend_Log::DEBUG, $file = "", $force = true) {
     
     if ($file == "") {
         if (Zend_Log::ERR == $type) {

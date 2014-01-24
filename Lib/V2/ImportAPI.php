@@ -220,4 +220,3 @@ myLog("FINITO DI IMPORTARE SESSIONE " . $mySession['UID'], Zend_Log::DEBUG, "Azz
         
   }
   
- ?>

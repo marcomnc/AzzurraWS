@@ -11,7 +11,7 @@
 ## path relative to web root
 
 ##    RewriteBase /magedemo/externalWs/azzurra/
-    RewriteBase /externalWs/AzzurraWS/
+    RewriteBase /externalWs/azzurra/
     
     RewriteCond %{REQUEST_FILENAME} !-f    
 

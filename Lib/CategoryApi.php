@@ -22,7 +22,8 @@ class CategoryApi {
             $this->_temporary->setParent(1);
             $this->_temporary->setLevel(1);
             $this->_temporary->setPath(1);
-            $this->_temporary->setIncludeInMenu(0);
+            //$this->_temporary->setIncludeInMenu(0);
+            $this->_temporary->setIncludeInMenu(1);
             $this->_temporary->setName(TEMPORARY_CATEGORY);
             $this->_temporary->setDescription(TEMPORARY_CATEGORY);
             $this->_temporary->setIsActive(1);
@@ -62,8 +63,9 @@ class CategoryApi {
                 $myCat->setAttributeSetId($myCat->getDefaultAttributeSetId());
                 $myCat->setPath(implode('/',$this->_temporary->getPathIds()));                          
                 $myCat->setParent($this->_temporary->getId());
-                $myCat->setIncludeInMenu(0);
-            };
+                //$myCat->setIncludeInMenu(0);
+                $myCat->setIncludeInMenu(1);
+            }
             $myCat->setName($categoria->Nome);
             $myCat->setDescription($categoria->Descrizione);
             $myCat->setAvCodice($categoria->ID);

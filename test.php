@@ -14,20 +14,11 @@ echo "<pre>";
 error_reporting(E_ALL);
 ini_set("display_errors",1 );
 
-$file = "Async.pippo.log";
-echo date("ymd");
-if (preg_match("/\./", $file)) {
-
-    $fileEx = preg_split("/\./", $file);
-echo "<pre>";
-print_r($fileEx);
-    $file = preg_replace("/\." . $fileEx[sizeof($fileEx)-1] ."/", "-" . date("ymd") . "." . $fileEx[sizeof($fileEx)-1], $file);
-} else {
-    $file .= date("ymd") .".log";
-}
-
-echo $file;
-
+$imp = 12345.345;
+$importo = Zend_Locale_Format::toNumber($imp, array('number_format' => '#0.00'));
+//$importo = preg_replace("/./", ",", $importo);
+echo $importo;
+die();
 
 ?>
     

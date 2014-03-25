@@ -717,4 +717,3 @@ if ( isset($_GET['wsdl']) && $_GET['wsdl'] == 'ori') {
     $soap->setClass("AzzurraWebServiceSoap");
     $soap->handle();
 }
-?>

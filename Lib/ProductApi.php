@@ -329,8 +329,7 @@ try {
         if ($this->_imgFormat->getData($format)."" != "") {
             $tmpArr = explode("\\", $imgName);
             if (sizeof($tmpArr)) {                
-                $fileId = str_replace(" ", "", $tmpArr[sizeof($tmpArr)-1]);
-                $fileName[0] = substr($fileId, 0, strlen($fileId) - 4);
+                $fileName[0] = str_replace(" ", "", $tmpArr[sizeof($tmpArr)-1]);
                 $fileName[1] = $format;
             }
             //Cancello i file temporanei
@@ -348,11 +347,10 @@ try {
         return $fileName;
     }
     
-    private function _getIdbyImage($imgName) {
+    public function _getIdbyImage($imgName) {
 
         $id = "";    
         if (is_array($imgName) && isset($imgName[0])) {
-            
             $id = Mage::getModel("catalog/product")->getIdBySku($imgName[0]);
             
         }

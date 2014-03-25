@@ -18,6 +18,7 @@ class WSDL {
             $this->_setWSDLfromFile();
             //$this->_setWSDL();
         }
+
         return $this->_wsdl;
     }
 
@@ -51,7 +52,6 @@ class WSDL {
                         //$baseNs = self::getBaseUri();
 
 			$this->_wsdl = '<?xml version="1.0" encoding="utf-8"?>' . "\n" . str_replace("#base_uri#", $baseUri, str_replace("#base_ns#", $baseNs, $wsdl));
-			
 		}
     
     private function _setWSDL () {

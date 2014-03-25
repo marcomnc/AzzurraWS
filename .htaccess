@@ -10,8 +10,8 @@
 ## you can put here your magento root folder
 ## path relative to web root
 
-##    RewriteBase /magedemo/externalWs/azzurra/
     RewriteBase /externalWs/azzurra/
+##    RewriteBase /externalWs/AzzurraWS/
     
     RewriteCond %{REQUEST_FILENAME} !-f    
 
@@ -52,3 +52,4 @@
     #Header append Vary User-Agent env=!dont-vary
 
 </IfModule>
+

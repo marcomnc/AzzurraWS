@@ -58,6 +58,11 @@ class ProductAPIAsync {
    
    public function caricaImmagine($NomeFileImmagine, $DatiImmagineInBase64) {
        
+       $pApi = new ProductApi();
+       
+       $prodId = $pApi->_getIdbyImage($NomeFileImmagine);
+       
+       if (prodId > 0) {
         $import = new ImportAPI();
         $session = $import->getSession();
 
@@ -65,15 +70,16 @@ class ProductAPIAsync {
             $session['Img_Insert']++;
             $imgInsert = array('IdImport'     => $session['Id'],
                                'UID'          => $session['UID'],
-                               'IdGestionale' => $NomeFileImmagine,
+                                   'IdGestionale' => $prodId,
                                'InsertDate'   => DbAPI::MySqlDateTime(),                                   
                                'Base64Img'    => $DatiImmagineInBase64);
 
             DbAPI::SaveTable("AV_Import_Image", $imgInsert);
             DbAPI::SaveTable("AV_Import", $session, array('Id'));
         }                   
+       }
        
+   }
        
    }
     
-}

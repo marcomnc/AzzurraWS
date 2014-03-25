@@ -109,7 +109,7 @@ class SalesApi {
 			$testataInfo->IDMetodoPagamento = "9";
 		    break;
                 default: //CC
-                        $testataInfo->IDMetodoPagamento = "1";
+                        $testataInfo->IDMetodoPagamento = "7";
                     break;
             }
 

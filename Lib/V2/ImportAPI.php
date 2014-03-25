@@ -76,12 +76,12 @@
   		if ($uid == "") {
                     $uid = $_SERVER['REMOTE_ADDR'] . "-%";
     		
-                    foreach (getallheaders() as $key => $value) {
-                            if ($key == "Chiave del microtime") {
-    				$uid = $value;
-    				break;
-                        }
-                    }
+                    //foreach (getallheaders() as $key => $value) {
+                    //        if ($key == "Chiave del microtime") {
+    		//		$uid = $value;
+    		//		break;
+                 //       }
+                  //  }
   		}
   		
   		$aprams = array("UID" =>        array( 'operator' => 'AND',
@@ -188,7 +188,9 @@ myLog("INIZIO AD IMPORTARE " . $mySession['UID'], Zend_Log::DEBUG, "Azzurra.Asyn
                 $mySession['ElabArtStart'] = DbAPI::MySqlDateTime();
                 DbAPI::SaveTable("AV_Import", $mySession, array('Id'));
                 
-                $products = DbAPI::GetTable("AV_Import_Insert", array("IdImport" => array('operator' => 'AND', 'comp' => '=', 'value' => $mySession['Id'])));
+                $products = DbAPI::GetTable("AV_Import_Insert", array("IdImport" => array('operator' => 'AND', 'comp' => '=', 'value' => $mySession['Id']),
+                                                          'executeDate' => array( 'operator' => 'AND', 'comp' => 'is null')));
+
                 
                 if (sizeof($products) > 0) {
                     $productAPI = new ProductApi();

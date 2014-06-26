@@ -9,6 +9,7 @@ umask(0);
 Mage::app();
 error_reporting(E_ALL);
 ini_set("log_errors", 1); 
+ini_set('memory_limit', '-1');
 ini_set("error_log", __DIR__ . DIRECTORY_SEPARATOR ."error.log");
 
 $_myrequest = file_get_contents('php://input');
@@ -89,7 +90,8 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
      */
     public function InserisciArticolo($articolo) {
 myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
-        $api = new ProductAPIAsync();        
+        //$api = new ProductAPIAsync();        
+	$api = new ProductApi();        
         $api->inserisciArticolo($articolo->articolo);
         $arr = new XmlOutPut;
         $arr->setResponse(__FUNCTION__."Response");
@@ -257,9 +259,9 @@ myLog($ordineTestata, Zend_Log::DEBUG);
 myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);        
         $retList = array();
         $prod = Mage::getModel("catalog/product")->getCollection()
-                    ->addAttributeToFilter("status", 1);
+                    ->addAttributeToFilter("status", 1);                    
         foreach ($prod as $p) {
-            $product = Mage::getModel("catalog/product")->Load($p->getId());
+            $product = Mage::getModel("catalog/product")->Load($p->getId());           
             if (!is_null($product->getAvIdproduct())) {
                 $retList[] = $product->getAvIdproduct();
             }
@@ -599,8 +601,9 @@ myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
      */
     public function CaricaImmagine($NomeFileImmagine) {
 myLog("enter in " . __FUNCTION__, Zend_Log::DEBUG);
+myLog(file_get_contents('php://input'), Zend_Log::DEBUG);
         $hlp = new ProductApi();           
-        $hlp->caricaImmagine($NomeFileImmagine->NomeFileImmagine, $NomeFileImmagine->DatiImmagineInBase64);
+        $hlp->caricaImmagine(str_replace(" ", "", $NomeFileImmagine->NomeFileImmagine), $NomeFileImmagine->DatiImmagineInBase64);
         
 //        $hlp = new ProductAPIAsync();   
 //        $hlp->caricaImmagine($NomeFileImmagine->NomeFileImmagine, $NomeFileImmagine->DatiImmagineInBase64);

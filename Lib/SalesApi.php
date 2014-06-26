@@ -99,15 +99,15 @@ class SalesApi {
 
             switch ($payment->getMethod()) {
                 case "purchaseorder":
-		case "banktransfer":
-                        $testataInfo->IDMetodoPagamento = "10";
-                    break;
+								case "banktransfer":
+                    $testataInfo->IDMetodoPagamento = "10";
+                break;
                 case "cashondelivery":
                         $testataInfo->IDMetodoPagamento = "5";
                     break;
-		case "paypal_standard":
-			$testataInfo->IDMetodoPagamento = "9";
-		    break;
+								case "paypal_standard":
+												$testataInfo->IDMetodoPagamento = "9";
+		    						break;
                 default: //CC
                         $testataInfo->IDMetodoPagamento = "7";
                     break;

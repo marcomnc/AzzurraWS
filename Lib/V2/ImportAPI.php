@@ -179,8 +179,8 @@ myLog("Ricostruisco l'indice per $indexName", Zend_Log::DEBUG);
         }
         
         public function batch($sessionId) {
-            
-            $session = DbAPI::GetTable("AV_Import", array('Id' =>  array( 'operator' => 'AND','comp' => '=','value' => $sessionId))); 		
+
+            $session = DbAPI::GetTable("AV_Import", array('Id' =>  array( 'operator' => 'AND','comp' => '=','value' => $sessionId ))); 		
 
             if (isset($session[0]['EndDate']) && $session[0]['EndDate']) {
                 $mySession = $session[0];
@@ -191,9 +191,10 @@ myLog("INIZIO AD IMPORTARE " . $mySession['UID'], Zend_Log::DEBUG, "Azzurra.Asyn
                 $products = DbAPI::GetTable("AV_Import_Insert", array("IdImport" => array('operator' => 'AND', 'comp' => '=', 'value' => $mySession['Id']),
                                                           'executeDate' => array( 'operator' => 'AND', 'comp' => 'is null')));
 
-                
+                $i = 0;
                 if (sizeof($products) > 0) {
                     $productAPI = new ProductApi();
+                    
                     foreach ($products as $product) {
                         
                         $myProduct = unserialize($product['SerializedObject']);
@@ -206,13 +207,49 @@ myLog("Inizio ad importare " . $myProduct->CodiceArticolo, Zend_Log::DEBUG, "Azz
 myLog("Finito di importare " . $myProduct->CodiceArticolo, Zend_Log::DEBUG, "Azzurra.Async.log");                                                
                         $product['ExecuteDate'] = DbAPI::MySqlDateTime();
                         DbAPI::SaveTable("AV_Import_Insert", $product, array('Id'));
+                        
+                        if ($i++ >= 10) {
+                            
+                            myLog("RiAvvio l'esecuzione batch", Zend_Log::DEBUG, "Azzurra.Async.log");                       
+                    
+                            $c = curl_init();
+                            curl_setopt($c, CURLOPT_URL, WSDL::getBaseUri().'/ws.php?___execute_batch=' . $sessionId);
+                            curl_setopt($c, CURLOPT_HEADER, false);         // Don't retrieve headers
+                            curl_setopt($c, CURLOPT_NOBODY, true);          // Don't retrieve the body
+                            curl_setopt($c, CURLOPT_RETURNTRANSFER, true);  // Return from curl_exec rather than echoing
+                            curl_setopt($c, CURLOPT_FRESH_CONNECT, true);   // Always ensure the connection is fresh
+
+                            // Timeout super fast once connected, so it goes into async.
+                            curl_setopt( $c, CURLOPT_TIMEOUT, 1 );
+
+                            curl_exec( $c );
+                            
+                            break;
+                            
+                        }
+                        
                     }
                     
-myLog("FINITO DI IMPORTARE SESSIONE " . $mySession['UID'], Zend_Log::DEBUG, "Azzurra.Async.log");                       
+if ($i >= 10)
+    myLog("FINITO DI IMPORTARE SESSIONE TEMPORANEA" . $mySession['UID'], Zend_Log::DEBUG, "Azzurra.Async.log");                       
+else
+    myLog("FINITO DI IMPORTARE SESSIONE " . $mySession['UID'], Zend_Log::DEBUG, "Azzurra.Async.log");                       
                 }
                 
-                $mySession['ElabArtStart'] = DbAPI::MySqlDateTime();
-                DbAPI::SaveTable("AV_Import", $mySession, array('Id'));
+                if ($i < 10) {
+                    
+                    $to      = 'marco@mancinellimarco.it,info@azzurravini.it';
+                    $subject = 'Fine Elaborazione Sessione ' . $sessionId;
+                    $message = 'La sessione di importazione n. ' . $sessionId . ' del ' . $mySession['StartDate'] . " e' terminata!";
+                    $headers = 'From: info@azzurravini.it' . "\r\n" .
+                        'Reply-To: info@azzurravini.it' . "\r\n" .
+                        'X-Mailer: PHP/' . phpversion();
+
+                    mail($to, $subject, $message, $headers);
+                    
+                    $mySession['ElabArtStart'] = DbAPI::MySqlDateTime();
+                    DbAPI::SaveTable("AV_Import", $mySession, array('Id'));
+                }
                 
             } else {
                 myLog("Tentativo di elaborare una sesseione $sessionId inesistente o non chiusa", Zend_Log::DEBUG, "Azzurra.Async.log");

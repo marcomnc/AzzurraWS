@@ -269,8 +269,8 @@ try {
     
     public function caricaImmagine ($imgName, $imgBase64) {        
         $fileName = $this->_getFileName($imgName);
-//myLog($this->_tmpBaseDir .$fileName[0]);        
-        //file_put_contents($this->_tmpBaseDir  .$fileName[0], base64_decode($imgBase64));        
+myLog($this->_tmpBaseDir .$fileName[0]);        
+        file_put_contents($this->_tmpBaseDir  .$fileName[0], base64_decode($imgBase64));        
         $this->_mediaApi = Mage::getModel("catalog/product_attribute_media_api");
         $id = $this->_getIdbyImage($fileName);
         if ($id."" != "" ) {
@@ -339,7 +339,7 @@ try {
                     $tmpFormat = substr($entry,-3);
                     if ($this->_imgFormat->getData($tmpFormat)."" != "") {
 
-                        unlink ($this->_tmpBaseDir . $entry);
+                       // unlink ($this->_tmpBaseDir . $entry);
                     }
                 }
             }                   
@@ -351,7 +351,9 @@ try {
 
         $id = "";    
         if (is_array($imgName) && isset($imgName[0])) {
-            $id = Mage::getModel("catalog/product")->getIdBySku($imgName[0]);
+	    $imageName = str_replace('.'.$imgName[1],'', $imgName[0]);
+myLog("\Leggo l'articolo . " . $imageName); 
+            $id = Mage::getModel("catalog/product")->getIdBySku($imageName);
             
         }
         return $id;
